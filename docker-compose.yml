@@ -11,7 +11,7 @@ services:
       WORDPRESS_DB_NAME: wp_izec3
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wp_evgp5
-      WORDPRESS_DB_PASSWORD: 1y~Y3$9F$$4fmgq#j
+      WORDPRESS_DB_PASSWORD: "1y~Y3$9F$$4fmgq#j"
 
     depends_on:
       - db
@@ -40,7 +40,7 @@ services:
       MYSQL_ROOT_PASSWORD: Aa3345678
       MYSQL_DATABASE: wp_izec3
       MYSQL_USER: wp_evgp5
-      MYSQL_PASSWORD: 1y~Y3$9F$$4fmgq#j
+      MYSQL_PASSWORD: "1y~Y3$9F$$4fmgq#j"
     restart: always
 
   phpmyadmin:
