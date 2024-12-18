@@ -19,6 +19,16 @@ services:
     restart: always
     ports:
       - 8080:80
+  coder:
+    image: codercom/code-server
+    restart: unless-stopped
+    environment:
+      - PASSWORD=Aa3345678
+      - TZ=Asia/Taipei
+    ports:
+      - "9001:8080"
+    volumes:
+      - ./wp-data/:/home/coder/project
 
   db:
     image: mariadb:latest
