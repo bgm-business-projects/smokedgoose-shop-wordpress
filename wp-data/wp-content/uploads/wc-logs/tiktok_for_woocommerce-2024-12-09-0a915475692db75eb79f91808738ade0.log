@@ -1,0 +1,30 @@
+2024-12-09T23:03:39+00:00 DEBUG POST: https://business-api.tiktok.com/open_api/v1.2/tbp/business_profile/store/update/
+
+{"business_platform":"WOO_COMMERCE","external_business_id":"tt4b_woocommerce_6745752a5fb05","net_gmv":[{"interval":"LIFETIME","max":24779,"min":24779,"unit":"CURRENCY"}],"net_order_count":[{"interval":"LIFETIME","max":5,"min":5,"unit":"COUNT"}],"tenure":{"min":49,"max":49,"unit":"DAYS"},"extra_data":"1.2.10"}
+ ajax: no
+2024-12-09T23:03:39+00:00 DEBUG Tt4b_Mapi_Class::mapi_post: Response: 
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 103
+X-Api-Deprecation-Info: API for Business Version 1.3 is now live. To avoid disruption to your business, we recommend you migrate all calls to v1.3 as soon as possible. Please visit our migration guide for more details: https://ads.tiktok.com/marketing_api/docs?id=1740029169927169
+X-Domain-Change-Info: We have moved to the new domain business-api.tiktok.com for API services after the Platform Upgrade on 09/30/2021. Please update all of your requests with the new domain if you haven't done so already. For more information, please visit https://ads.tiktok.com/marketing_api/docs?rid=esb88xalm6m&id=1709207085043713
+X-Tt-Logid: 2024120923033802407C13FF64F9FCD0FA
+x-tt-trace-host: 0120f6cca039638cb153ac3fb56bbba577e6969c632187c2832b7a34106380a5c8d949f70365d60c37a651b28624b59c280f5c9a39f28c68217e03c30a24b2d080af1234dca4da9c1b9daea7378c4d3fa39db5fae91afa238f00b9e83ec833ea610591a1859628ba3eeaf7c54aaa550024
+x-tt-trace-id: 00-24120923033802407C13FF64F9FCD0FA-156E4FFD5330910C-00
+Server: TLB
+X-Origin-Response-Time: 8,23.47.190.52
+X-Akamai-Request-ID: 45b0a1.7a5abb42
+Expires: Mon, 09 Dec 2024 23:03:39 GMT
+Cache-Control: max-age=0, no-cache, no-store
+Pragma: no-cache
+Date: Mon, 09 Dec 2024 23:03:39 GMT
+X-Cache: TCP_MISS from a23-202-34-111.deploy.akamaitechnologies.com (AkamaiGHost/11.7.1-5564540792473a75b19a89fcf1e2a34b) (-)
+Connection: close
+X-Cache-Remote: TCP_MISS from a23-47-190-52.deploy.akamaitechnologies.com (AkamaiGHost/11.7.2.1-9611f29bef89eba7b18045b10aa2af98) (-)
+x-tt-trace-tag: id=16;cdn-cache=miss;type=dyn
+Server-Timing: cdn-cache; desc=MISS, edge; dur=32, origin; dur=8
+Server-Timing: inner; dur=3
+X-Parent-Response-Time: 39,23.202.34.111
+
+{"code":40104,"message":"The access_token is empty.","request_id":"2024120923033802407C13FF64F9FCD0FA"}

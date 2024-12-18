@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    volumes:
+      - ./wp-data:/var/www/html
+    environment:
+      - WORDPRESS_TABLE_PREFIX=qrYy9H_
+      - WORDPRESS_DB_NAME=wp_izec3
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wp_evgp5
+      - WORDPRESS_DB_PASSWORD=1y~Y3$9F$4fmgq#j
+      # - WORDPRESS_WP_DEBUG=true
+    depends_on:
+      - db
+      - phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    volumes:
+      - ./db-data/:/var/lib/mysql
+      - ./backup/sqldump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: Aa3345678
+      MYSQL_DATABASE: wp_izec3
+      MYSQL_USER: wp_evgp5
+      MYSQL_PASSWORD: 1y~Y3$9F$4fmgq#j
+    restart: always
+
+  phpmyadmin:
+    depends_on:
+      - db                # 確保 mysql 容器先啟動
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8180:80"  # 對外開放的 phpMyAdmin 管理界面
+    environment:
+      PMA_HOST: db        # 指定要連接的 MySQL 容器名稱
+      PMA_PORT: 3306         # MySQL 服務的連接埠
+      MYSQL_ROOT_PASSWORD: Aa3345678 # MySQL root 密碼
+
+
+volumes:
+  db_data:
