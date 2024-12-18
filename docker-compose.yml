@@ -7,12 +7,12 @@ services:
     volumes:
       - ./wp-data:/var/www/html
     environment:
-      - WORDPRESS_TABLE_PREFIX=qrYy9H_
-      - WORDPRESS_DB_NAME=wp_izec3
-      - WORDPRESS_DB_HOST=db
-      - WORDPRESS_DB_USER=wp_evgp5
-      - WORDPRESS_DB_PASSWORD=1y~Y3$9F$4fmgq#j
-      # - WORDPRESS_WP_DEBUG=true
+      WORDPRESS_TABLE_PREFIX: qrYy9H_
+      WORDPRESS_DB_NAME: wp_izec3
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp_evgp5
+      WORDPRESS_DB_PASSWORD: 1y~Y3$9F$4fmgq#j
+
     depends_on:
       - db
       - phpmyadmin
