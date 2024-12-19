@@ -42,7 +42,7 @@ services:
     ports:
       - "9001:8080"
     volumes:
-      - ./wp-data/:/home/coder/project
+      - ./wordpress_data/:/home/coder/project
   
   db:
     image: mysql:8.0
