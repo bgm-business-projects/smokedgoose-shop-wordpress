@@ -1,85 +1,43 @@
-version: '3.8'
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
 
 services:
-
-  app:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      # These ports are in format <host-port>:<container-port>
-      - '80:80' # Public HTTP Port
-      - '81:81' # Admin Web Port
-      # Add any other Stream port you want to expose
-      # - '21:21' # FTP
-
-    # Uncomment the next line if you uncomment anything in the section
-    # environment:
-      # Uncomment this if you want to change the location of
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
-
-      # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
-
+  mariadb:
+    image: docker.io/bitnami/mariadb:latest
     volumes:
-      - ./nginx-proxy-data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - './mariadb_data:/bitnami/mariadb'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - MARIADB_ROOT_PASSWORD=Aa3345678
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_DATABASE=bitnami_wordpress
+      - MARIADB_PASSWORD=bitnami
 
   wordpress:
-    image: wordpress:latest
-    container_name: wordpress
+    image: docker.io/bitnami/wordpress:6
+    ports:
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - ./wp-data:/var/www/html
-    environment:
-      WORDPRESS_TABLE_PREFIX: qrYy9H_
-      WORDPRESS_DB_NAME: wp_izec3
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wp_evgp5
-      WORDPRESS_DB_PASSWORD: Aa3345678
-
+      - './wordpress_data:/bitnami/wordpress'
     depends_on:
-      - db
-      - phpmyadmin
-    restart: always
-    ports:
-      - 8080:80
-  coder:
-    image: codercom/code-server
-    restart: unless-stopped
+      - mariadb
     environment:
-      PASSWORD: Aa3345678
-      TZ: Asia/Taipei
-    ports:
-      - "9001:8080"
-    volumes:
-      - ./wp-data/:/home/coder/project
-
-  db:
-    image: mariadb:latest
-    container_name: db
-    volumes:
-      - ./db-data/:/var/lib/mysql
-      - ./backup/sqldump.sql:/docker-entrypoint-initdb.d/dump.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: Aa3345678
-      MYSQL_DATABASE: wp_izec3
-      MYSQL_USER: wp_evgp5
-      MYSQL_PASSWORD: Aa3345678
-    restart: always
-
-  phpmyadmin:
-    depends_on:
-      - db                # 確保 mysql 容器先啟動
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
-    ports:
-      - "8180:80"  # 對外開放的 phpMyAdmin 管理界面
-    environment:
-      PMA_HOST: db        # 指定要連接的 MySQL 容器名稱
-      PMA_PORT: 3306         # MySQL 服務的連接埠
-      MYSQL_ROOT_PASSWORD: Aa3345678 # MySQL root 密碼
-
-
-volumes:
-  db_data:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      # - ALLOW_EMPTY_PASSWORD=yes
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - WORDPRESS_DATABASE_PASSWORD=bitnami
+      - WORDPRESS_ENABLE_HTTPS=yes
+      - WORDPRESS_USERNAME=karl
+      - WORDPRESS_PASSWORD=Aa3345678
+      - WORDPRESS_ENABLE_MULTISITE=yes
+      - WORDPRESS_MULTISITE_NETWORK_TYPE=subdomain
+      - WORDPRESS_MULTISITE_HOST=karllin.com
+# volumes:
+#   mariadb_data:
+#     driver: ./local
+#   wordpress_data:
+#     driver: ./local
