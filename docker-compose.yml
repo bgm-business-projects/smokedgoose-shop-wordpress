@@ -69,3 +69,11 @@ services:
       PMA_HOST: db        # 指定要連接的 MySQL 容器名稱
       PMA_PORT: 3306         # MySQL 服務的連接埠
       MYSQL_ROOT_PASSWORD: Aa3345678 # MySQL root 密碼
+
+  redis:     #redis服务/其他服务（web服务/nginx服务等）
+      image: redis:7                            #redis镜像，如果镜像容器没有会去自动拉取
+      container_name: redis                     #设置容器名称
+      command: redis-server --appendonly yes --requirepass '123456'    #开启持久化的支持并设置认证密码
+      restart: always                           #跟随docker的启动而启动
+      volumes:
+        - ./redis_data:/data  
