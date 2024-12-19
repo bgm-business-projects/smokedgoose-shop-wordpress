@@ -33,6 +33,7 @@ services:
     restart: always
 
   coder:
+    container_name: coder
     image: codercom/code-server
     restart: unless-stopped
     environment:
